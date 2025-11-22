@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maya… one chance?</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg1: #f8c8d8;
+    --bg2: #c8d8ff;
+    --card-bg: rgba(255,255,255,0.28);
+    --text-dark: #1a1a1a;
+    --text-light: #444;
+    --rose: #ff4f7b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 30px 14px;
+    overflow-x: hidden;
+  }
+
+  .card {
+    width: min(480px, 95vw);
+    padding: 34px 26px 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.15);
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: var(--rose);
+    text-align: center;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-top: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+
+  .letter {
+    margin-top: 24px;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.75;
+    white-space: pre-wrap;
+    opacity: 0;
+    animation: fadeText 1.4s ease 0.3s forwards;
+  }
+
+  @keyframes fadeText {
+    to { opacity: 1; }
+  }
+
+  .btn {
+    margin-top: 24px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: var(--rose);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .tiny {
+    margin-top: 14px;
+    text-align: center;
+    color: #333;
+    font-size: 0.85rem;
+  }
+
+  /* Floating hearts */
+  .hearts span {
+    position: absolute;
+    font-size: 20px;
+    color: #ff4f7b;
+    animation: float 3s ease-in forwards;
+    opacity: 0.8;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(0.9); opacity: 0.9; }
+    70% { opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Maya… can I say something?</h1>
+  <p class="subtitle">No pressure. Just honesty.</p>
+
+  <p class="letter" id="letterText">
+Maya,
+
+I’ve been replaying everything in my mind…  
+our late-night VCs, your sleepy voice, the way you check on me even when your eyes can barely stay open…  
+and especially that moment when we were just looking at each other in silence.  
+I don’t know why, but that moment keeps coming back to me.
+
+And maybe that’s why something became clear to me:
+
+I didn’t realise when “I like you” quietly turned into  
+“I love you.”
+
+It wasn’t dramatic.  
+It wasn’t loud.  
+It just happened slowly, softly…  
+the same way your presence settles me after a long day.
+
+And when you told me about your brother,  
+I didn’t get angry — I understood.  
+I saw how much you value your people.  
+I saw the weight you carry alone.  
+And I respected you even more for it.
+
+But Maya… I don’t want something real to stop before it even gets a chance to grow,  
+just because of where I was born.
+
+What we share —  
+the comfort, the calm, the laughs, the way you talk,  
+the way you look at me through the screen —  
+it doesn’t feel small.
+
+I’m not asking you to fight anyone for me.  
+I’m not asking you to choose.  
+I’m just asking for one honest chance —  
+to show you who I am,  
+and to show your brother the man you’re getting to know.
+
+I want to be gentle with your heart,  
+patient with your fears,  
+and steady when you feel confused.
+
+We don’t have to rush.  
+We don’t have to decide everything today.  
+We can move at your pace — slowly, carefully, together.
+
+Just… don’t close the door yet, maya.
+
+Because after everything we’ve shared,  
+something in me truly believes  
+that you and I could become something beautiful  
+if we let it grow.
+  </p>
+
+  <button class="btn" id="heartBtn">Tap here if this made you feel anything</button>
+
+  <div class="tiny">P.S. Even reading this… you’re smiling a little. I know.</div>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+  // Floating hearts
+  const heartBtn = document.getElementById("heartBtn");
+  const hearts = document.getElementById("hearts");
+
+  heartBtn.addEventListener("click", () => {
+    burstHearts(20);
+    alert("Just wanted you to know… you matter to me, maya.");
+  });
+
+  function burstHearts(count){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    for(let i=0; i<count; i++){
+      const span = document.createElement("span");
+      span.textContent = "❤";
+      span.style.left = (Math.random() * w) + "px";
+      span.style.top = (Math.random() * h) + "px";
+      hearts.appendChild(span);
+      setTimeout(() => span.remove(), 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
